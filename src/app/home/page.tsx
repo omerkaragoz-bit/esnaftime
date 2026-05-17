@@ -3,12 +3,14 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Search, Star, MapPin, Percent, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/lib/LanguageContext";
 import styles from "./page.module.css";
 
 const categories = ["All", "Food", "Cafe", "Tech", "Books", "Fashion", "Health", "Services"];
 
 export default function HomePage() {
   const { data: session } = useSession();
+  const { t } = useLanguage();
   const [merchants, setMerchants] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -26,8 +28,8 @@ export default function HomePage() {
     <div className="page">
       <header className={styles.header}>
         <div>
-          <p className={styles.greeting}>Hello, {session?.user?.name?.split(" ")[0]} 👋</p>
-          <h1 className={styles.heading}>Discover Merchants</h1>
+          <p className={styles.greeting}>{t("home_hello")} {session?.user?.name?.split(" ")[0]} 👋</p>
+          <h1 className={styles.heading}>{t("home_discover")}</h1>
         </div>
         <div className={styles.avatar}>
           {session?.user?.image ? (
@@ -40,7 +42,7 @@ export default function HomePage() {
 
       <div className="search-bar" style={{marginBottom:16}}>
         <Search size={18} color="#9CA3AF" />
-        <input placeholder="Search merchants..." value={search} onChange={e => setSearch(e.target.value)} />
+        <input placeholder={t("home_search_ph")} value={search} onChange={e => setSearch(e.target.value)} />
       </div>
 
       <div className={styles.categories}>
@@ -52,25 +54,16 @@ export default function HomePage() {
       </div>
 
       {loading ? (
-        <div className={styles.loadingGrid}>
-          {[1,2,3].map(i => <div key={i} className={styles.skeleton} />)}
-        </div>
+        <div className={styles.loadingGrid}>{[1,2,3].map(i => <div key={i} className={styles.skeleton} />)}</div>
       ) : merchants.length === 0 ? (
-        <div className={styles.empty}>
-          <p>No merchants found</p>
-          <span>Try a different search or category</span>
-        </div>
+        <div className={styles.empty}><p>{t("home_no_merchants")}</p><span>{t("home_no_merchants_desc")}</span></div>
       ) : (
         <div className={styles.grid}>
           {merchants.map((m, i) => (
             <Link href={`/merchant/${m.id}`} key={m.id} className={`card ${styles.merchantCard}`} style={{animationDelay: `${i * 0.08}s`}}>
               <div className={styles.cardHeader}>
-                <div className={styles.merchantLogo}>
-                  {m.logo_url ? <img src={m.logo_url} alt="" /> : <span>{m.business_name[0]}</span>}
-                </div>
-                {m.discount_percent > 0 && (
-                  <span className="badge badge-accent"><Percent size={12} /> {m.discount_percent}%</span>
-                )}
+                <div className={styles.merchantLogo}>{m.logo_url ? <img src={m.logo_url} alt="" /> : <span>{m.business_name[0]}</span>}</div>
+                {m.discount_percent > 0 && <span className="badge badge-accent"><Percent size={12} /> {m.discount_percent}%</span>}
               </div>
               <h3 className={styles.merchantName}>{m.business_name}</h3>
               <p className={styles.merchantCat}>{m.category}</p>

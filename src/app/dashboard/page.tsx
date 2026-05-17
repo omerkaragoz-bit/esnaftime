@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { BarChart3, Users, Star, Percent, Save, Eye } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 import styles from "./page.module.css";
 
 export default function DashboardPage() {
   const { data: session } = useSession();
+  const { t } = useLanguage();
   const [merchant, setMerchant] = useState<any>(null);
   const [form, setForm] = useState({ business_name: "", category: "", address: "", phone: "", description: "", discount_percent: 0 });
   const [reviews, setReviews] = useState<any[]>([]);
@@ -27,64 +29,46 @@ export default function DashboardPage() {
 
   return (
     <div className="page">
-      <h1 className={styles.title}>Merchant Dashboard</h1>
+      <h1 className={styles.title}>{t("dash_title")}</h1>
 
       <div className={styles.statsGrid}>
         {[
-          { icon: Star, label: "Rating", value: merchant ? Number(merchant.rating).toFixed(1) : "0.0", color: "var(--warning)" },
-          { icon: Users, label: "Reviews", value: merchant?.review_count || 0, color: "var(--primary)" },
-          { icon: Percent, label: "Discount", value: `${form.discount_percent}%`, color: "var(--accent)" },
-          { icon: Eye, label: "Verified", value: merchant?.verified ? "Yes" : "No", color: "var(--success)" },
+          { icon: Star, label: t("dash_rating"), value: merchant ? Number(merchant.rating).toFixed(1) : "0.0", color: "var(--warning)" },
+          { icon: Users, label: t("dash_reviews"), value: merchant?.review_count || 0, color: "var(--primary)" },
+          { icon: Percent, label: t("dash_discount"), value: `${form.discount_percent}%`, color: "var(--accent)" },
+          { icon: Eye, label: t("dash_verified"), value: merchant?.verified ? "Yes" : "No", color: "var(--success)" },
         ].map(({ icon: Icon, label, value, color }) => (
           <div key={label} className={styles.statCard}>
-            <Icon size={20} color={color} />
-            <strong>{value}</strong>
-            <span>{label}</span>
+            <Icon size={20} color={color} /><strong>{value}</strong><span>{label}</span>
           </div>
         ))}
       </div>
 
       <div className={`card ${styles.formCard}`}>
-        <h2 className={styles.sectionTitle}>Business Info</h2>
+        <h2 className={styles.sectionTitle}>{t("dash_business_info")}</h2>
+        <label className={styles.field}><span>{t("dash_bname")}</span><input value={form.business_name} onChange={e => setForm(f => ({...f, business_name: e.target.value}))} /></label>
         <label className={styles.field}>
-          <span>Business Name</span>
-          <input value={form.business_name} onChange={e => setForm(f => ({...f, business_name: e.target.value}))} />
-        </label>
-        <label className={styles.field}>
-          <span>Category</span>
+          <span>{t("dash_category")}</span>
           <select value={form.category} onChange={e => setForm(f => ({...f, category: e.target.value}))}>
-            {["Food","Cafe","Tech","Books","Fashion","Health","Services","General"].map(c => <option key={c}>{c}</option>)}
+            {["Food","Cafe","Stationery","Clothing","Pharmacy","Other"].map(c => <option key={c}>{c}</option>)}
           </select>
         </label>
-        <label className={styles.field}>
-          <span>Address</span>
-          <input value={form.address} onChange={e => setForm(f => ({...f, address: e.target.value}))} />
-        </label>
-        <label className={styles.field}>
-          <span>Phone</span>
-          <input value={form.phone || ""} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
-        </label>
-        <label className={styles.field}>
-          <span>Description</span>
-          <textarea value={form.description || ""} onChange={e => setForm(f => ({...f, description: e.target.value}))} rows={3} />
-        </label>
-        <label className={styles.field}>
-          <span>Discount (%)</span>
-          <input type="number" min={0} max={100} value={form.discount_percent} onChange={e => setForm(f => ({...f, discount_percent: Number(e.target.value)}))} />
-        </label>
+        <label className={styles.field}><span>{t("dash_address")}</span><input value={form.address} onChange={e => setForm(f => ({...f, address: e.target.value}))} /></label>
+        <label className={styles.field}><span>{t("dash_phone")}</span><input value={form.phone || ""} onChange={e => setForm(f => ({...f, phone: e.target.value}))} /></label>
+        <label className={styles.field}><span>{t("dash_desc")}</span><textarea value={form.description || ""} onChange={e => setForm(f => ({...f, description: e.target.value}))} rows={3} /></label>
+        <label className={styles.field}><span>{t("dash_discount_pct")}</span><input type="number" min={0} max={100} value={form.discount_percent} onChange={e => setForm(f => ({...f, discount_percent: Number(e.target.value)}))} /></label>
         <button className="btn-primary" onClick={handleSave} disabled={saving}>
-          <Save size={16} /> {saved ? "Saved!" : saving ? "Saving..." : "Save Changes"}
+          <Save size={16} /> {saved ? t("dash_saved") : saving ? t("dash_saving") : t("dash_save")}
         </button>
       </div>
 
-      <h2 className={styles.sectionTitle} style={{marginTop:24}}>Recent Reviews</h2>
+      <h2 className={styles.sectionTitle} style={{marginTop:24}}>{t("dash_recent_reviews")}</h2>
       {reviews.length === 0 ? (
-        <p className={styles.noReviews}>No reviews yet</p>
+        <p className={styles.noReviews}>{t("dash_no_reviews")}</p>
       ) : reviews.slice(0, 5).map(r => (
         <div key={r.id} className={`card ${styles.reviewItem}`}>
           <div className={styles.reviewHeader}>
-            <strong>{r.reviewer_name}</strong>
-            <div className={styles.stars}>{Array.from({length: r.stars}).map((_, i) => <Star key={i} size={12} fill="#F59E0B" color="#F59E0B" />)}</div>
+            <strong>{r.reviewer_name}</strong><div className={styles.stars}>{Array.from({length: r.stars}).map((_, i) => <Star key={i} size={12} fill="#F59E0B" color="#F59E0B" />)}</div>
           </div>
           {r.comment && <p>{r.comment}</p>}
         </div>
