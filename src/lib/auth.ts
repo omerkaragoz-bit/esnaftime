@@ -5,8 +5,8 @@ import { getDb } from "./db";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || process.env.AUTH_GOOGLE_ID || "203482802445-390fern1leqcut1ql9d7mrj3iu081ir8.apps.googleusercontent.com",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || process.env.AUTH_GOOGLE_SECRET || "",
     }),
   ],
   callbacks: {
