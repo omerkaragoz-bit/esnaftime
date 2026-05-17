@@ -1,12 +1,12 @@
 "use client";
 import { useSession, signOut } from "next-auth/react";
-import { User, Mail, Shield, Bell, Settings, LogOut, HelpCircle, Info } from "lucide-react";
+import { User, Mail, Shield, Bell, LogOut, HelpCircle, Info, Globe } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 import styles from "./page.module.css";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
-  const { t } = useLanguage();
+  const { lang, setLang, t } = useLanguage();
 
   if (!session) return null;
 
@@ -33,6 +33,31 @@ export default function ProfilePage() {
       </div>
 
       <div className={styles.section}>
+        <div className={styles.item}>
+          <Globe size={18} color="var(--primary)" />
+          <div style={{ flex: 1 }}>
+            <small>Language</small>
+            <div style={{ display: "flex", gap: "10px", marginTop: "4px" }}>
+              <button 
+                onClick={() => setLang("en")}
+                style={{
+                  padding: "4px 12px", borderRadius: "8px", border: "1px solid var(--primary)",
+                  background: lang === "en" ? "var(--primary)" : "transparent",
+                  color: lang === "en" ? "#fff" : "var(--primary)",
+                  fontWeight: "600", fontSize: "0.85rem"
+                }}>EN</button>
+              <button 
+                onClick={() => setLang("tr")}
+                style={{
+                  padding: "4px 12px", borderRadius: "8px", border: "1px solid var(--primary)",
+                  background: lang === "tr" ? "var(--primary)" : "transparent",
+                  color: lang === "tr" ? "#fff" : "var(--primary)",
+                  fontWeight: "600", fontSize: "0.85rem"
+                }}>TR</button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.divider} />
         <button className={styles.actionBtn}><Bell size={18} /> {t("profile_notif")}</button>
         <div className={styles.divider} />
         <button className={styles.actionBtn}><HelpCircle size={18} /> {t("profile_help")}</button>
