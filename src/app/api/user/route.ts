@@ -5,16 +5,24 @@ import { getDb } from "@/lib/db";
 export async function PUT(req: NextRequest) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const { role } = await req.json();
+  const data = await req.json();
+  const { role } = data;
   if (!["student", "merchant"].includes(role)) {
     return NextResponse.json({ error: "Invalid role" }, { status: 400 });
   }
   const sql = getDb();
   await sql`UPDATE users SET role = ${role}, updated_at = NOW() WHERE email = ${session.user.email!}`;
+  
   if (role === "merchant") {
     const existing = await sql`SELECT id FROM merchants WHERE user_id = ${session.user.id}`;
     if (existing.length === 0) {
-      await sql`INSERT INTO merchants (user_id, business_name, category, address) VALUES (${session.user.id}, ${session.user.name || 'My Business'}, 'General', 'Address pending')`;
+      const business_name = data.business_name || session.user.name || 'My Business';
+      const category = data.category || 'General';
+      const address = data.address || 'Address pending';
+      const discount_percent = data.discount_percent ? parseInt(data.discount_percent) : 0;
+      
+      await sql`INSERT INTO merchants (user_id, business_name, category, address, discount_percent) 
+                VALUES (${session.user.id}, ${business_name}, ${category}, ${address}, ${discount_percent})`;
     }
   }
   return NextResponse.json({ success: true });
