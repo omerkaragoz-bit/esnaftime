@@ -58,7 +58,7 @@ export default function OnboardingPage() {
               <input type="range" min="5" max="50" step="1" value={formData.discount_percent} onChange={e => setFormData(f => ({...f, discount_percent: parseInt(e.target.value)}))} className={styles.slider} />
               <small>{t("onboarding_discount_desc")}</small>
             </label>
-            <button type="submit" className="btn-primary" disabled={loading} style={{marginTop: 10}}>
+            <button type="submit" className="btn-primary" disabled={loading} style={{marginTop: 10, background: "var(--accent)"}}>
               {loading ? t("onboarding_registering") : t("onboarding_register_btn")}
             </button>
           </form>
@@ -72,16 +72,18 @@ export default function OnboardingPage() {
       <h1 className={styles.title}>{t("onboarding_welcome")} {session?.user?.name?.split(" ")[0]}!</h1>
       <p className={styles.subtitle}>{t("onboarding_subtitle")}</p>
       <div className={styles.cards}>
-        <button className={styles.roleCard} onClick={handleStudentSelect} disabled={loading}>
-          <GraduationCap size={40} />
+        <div className={styles.roleCard}>
+          <GraduationCap size={40} color="#3B82F6" />
           <h3>{t("onboarding_student")}</h3>
           <p>{t("onboarding_student_desc")}</p>
-        </button>
-        <button className={styles.roleCard} onClick={() => setShowMerchantForm(true)} disabled={loading}>
-          <Store size={40} />
+          <button className={styles.studentBtn} onClick={handleStudentSelect} disabled={loading}>{t("onboarding_student_btn")}</button>
+        </div>
+        <div className={styles.roleCard}>
+          <Store size={40} color="var(--accent)" />
           <h3>{t("onboarding_merchant")}</h3>
           <p>{t("onboarding_merchant_desc")}</p>
-        </button>
+          <button className={styles.merchantBtn} onClick={() => setShowMerchantForm(true)} disabled={loading}>{t("onboarding_merchant_btn")}</button>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (session) {
-      router.push(session.user.role === "merchant" ? "/dashboard" : "/home");
+      if (session.user.role === "new") router.push("/onboarding"); else router.push(session.user.role === "merchant" ? "/dashboard" : "/home");
     }
   }, [session, router]);
 
@@ -30,15 +30,15 @@ export default function LoginPage() {
 
       <div className={styles.features}>
         <div className={styles.feature}>
-          <span className={styles.featureIcon}>🏪</span>
+          <span className={styles.featureIcon}>ðŸª</span>
           <div><strong>{t("login_f1_title")}</strong><p>{t("login_f1_desc")}</p></div>
         </div>
         <div className={styles.feature}>
-          <span className={styles.featureIcon}>⭐</span>
+          <span className={styles.featureIcon}>â­</span>
           <div><strong>{t("login_f2_title")}</strong><p>{t("login_f2_desc")}</p></div>
         </div>
         <div className={styles.feature}>
-          <span className={styles.featureIcon}>💰</span>
+          <span className={styles.featureIcon}>ðŸ’°</span>
           <div><strong>{t("login_f3_title")}</strong><p>{t("login_f3_desc")}</p></div>
         </div>
       </div>

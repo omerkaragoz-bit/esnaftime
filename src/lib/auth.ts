@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (existing.length === 0) {
         await sql`
           INSERT INTO users (name, email, avatar_url, verified, role)
-          VALUES (${user.name!}, ${user.email!}, ${user.image || null}, true, 'student')
+          VALUES (${user.name!}, ${user.email!}, ${user.image || null}, true, 'new')
         `;
       }
       return true;

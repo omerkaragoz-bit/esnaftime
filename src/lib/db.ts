@@ -10,7 +10,7 @@ export type User = {
   name: string;
   email: string;
   password_hash: string | null;
-  role: 'student' | 'merchant';
+  role: 'student' | 'merchant' | 'new';
   verified: boolean;
   avatar_url: string | null;
   created_at: string;
