@@ -1,0 +1,55 @@
+.container { min-height:100vh; }
+.hero {
+  background:linear-gradient(160deg, #0f2440, #1A3C6E, #2a5298);
+  padding:20px 16px 40px;
+  position:relative;
+}
+.backBtn {
+  background:rgba(255,255,255,0.15); border:none; color:#fff;
+  width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.heroContent { text-align:center; margin-top:16px; color:#fff; }
+.logo {
+  width:72px; height:72px; border-radius:20px; margin:0 auto 12px;
+  background:linear-gradient(135deg, var(--accent), var(--accent-light));
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem; font-weight:700; color:#fff;
+  box-shadow:0 8px 25px rgba(240,124,0,0.3);
+}
+.heroContent h1 { font-size:1.5rem; }
+.category { opacity:0.7; margin-top:4px; }
+.statsRow { display:flex; gap:12px; margin:16px 0; }
+.stat {
+  display:flex; align-items:center; gap:6px; padding:10px 16px;
+  background:#fff; border-radius:12px; font-size:0.85rem; box-shadow:var(--shadow);
+}
+.stat span { color:var(--text-secondary); }
+.discountBadge { background:rgba(240,124,0,0.08); color:var(--accent); }
+.infoCard { margin-bottom:16px; }
+.infoRow { display:flex; align-items:center; gap:10px; font-size:0.88rem; margin-bottom:8px; }
+.desc { color:var(--text-secondary); font-size:0.85rem; margin-top:8px; line-height:1.5; }
+.loyaltyCard {
+  background:linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius:var(--radius); padding:20px; color:#fff; margin-bottom:24px;
+}
+.loyaltyHeader { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.loyaltyHeader h3 { font-size:1rem; }
+.progressBar { height:8px; background:rgba(255,255,255,0.2); border-radius:4px; overflow:hidden; }
+.progressFill { height:100%; background:var(--accent); border-radius:4px; transition:width 0.5s; }
+.loyaltyHint { font-size:0.78rem; opacity:0.7; margin-top:8px; }
+.sectionTitle { font-size:1.1rem; margin-bottom:16px; }
+.reviewForm { margin-bottom:16px; }
+.starPicker { display:flex; gap:4px; margin-bottom:12px; }
+.starPicker button { background:none; border:none; cursor:pointer; padding:2px; }
+.textarea { width:100%; border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:12px; resize:none; font-size:0.88rem; margin-bottom:12px; }
+.reviewList { display:flex; flex-direction:column; gap:10px; }
+.reviewItem p { font-size:0.85rem; margin:6px 0; color:var(--text-secondary); line-height:1.4; }
+.reviewHeader { display:flex; justify-content:space-between; align-items:center; }
+.reviewHeader strong { font-size:0.9rem; }
+.reviewStars { display:flex; gap:1px; }
+.reviewDate { font-size:0.72rem; color:var(--text-secondary); }
+.noReviews { text-align:center; padding:30px; color:var(--text-secondary); font-size:0.9rem; }
+.loading { min-height:100vh; display:flex; align-items:center; justify-content:center; }
+.spinner { width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }

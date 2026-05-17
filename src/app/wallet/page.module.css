@@ -1,0 +1,32 @@
+.title { font-size:1.5rem; margin-bottom:20px; }
+.summaryCard {
+  background:linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius:var(--radius); padding:24px; color:#fff;
+  display:flex; align-items:center; justify-content:space-around; margin-bottom:24px;
+}
+.summaryItem { display:flex; align-items:center; gap:12px; }
+.summaryValue { font-family:"Syne",sans-serif; font-size:1.6rem; font-weight:800; display:block; }
+.summaryLabel { font-size:0.75rem; opacity:0.7; }
+.divider { width:1px; height:50px; background:rgba(255,255,255,0.2); }
+.sectionTitle { font-size:1.1rem; margin-bottom:14px; }
+.list { display:flex; flex-direction:column; gap:12px; }
+.loyaltyItem { background:#fff; border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); }
+.itemHeader { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.merchantIcon {
+  width:40px; height:40px; border-radius:12px;
+  background:linear-gradient(135deg, var(--primary), var(--accent));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:700;
+}
+.merchantInfo { flex:1; }
+.merchantInfo strong { font-size:0.92rem; display:block; }
+.category { font-size:0.75rem; color:var(--text-secondary); }
+.tierBadge { padding:4px 10px; border-radius:20px; font-size:0.7rem; font-weight:700; text-transform:uppercase; }
+.statsRow { display:flex; gap:16px; font-size:0.8rem; color:var(--text-secondary); margin-bottom:10px; }
+.discount { color:var(--accent); font-weight:600; }
+.progressBar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+.progressFill { height:100%; border-radius:3px; transition:width 0.5s; }
+.progressLabel { font-size:0.7rem; color:var(--text-secondary); margin-top:4px; display:block; }
+.empty { text-align:center; padding:60px 0; color:var(--text-secondary); }
+.empty p { font-size:1rem; font-weight:600; color:var(--text); margin:12px 0 4px; }
+.empty span { font-size:0.85rem; }

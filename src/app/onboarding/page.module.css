@@ -1,0 +1,26 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: linear-gradient(160deg, #0f2440 0%, #1A3C6E 50%, #2a5298 100%);
+}
+.title { color: #fff; font-size: 1.8rem; text-align: center; }
+.subtitle { color: rgba(255,255,255,0.6); margin: 8px 0 32px; font-size: 1rem; }
+.cards { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.roleCard {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.roleCard:hover { border-color: var(--accent); background: rgba(240,124,0,0.1); transform: translateY(-2px); }
+.roleCard h3 { font-family: 'Syne', sans-serif; font-size: 1.3rem; margin: 12px 0 6px; }
+.roleCard p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.4; }

@@ -1,0 +1,89 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 24px;
+  background: linear-gradient(160deg, #0f2440 0%, #1A3C6E 40%, #2a5298 100%);
+  position: relative;
+  overflow: hidden;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(240,124,0,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero { text-align: center; margin-bottom: 40px; animation: fadeIn 0.6s ease-out; }
+.logoCircle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 30px rgba(240,124,0,0.3);
+}
+.logoIcon { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; }
+.title { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+.subtitle { color: rgba(255,255,255,0.7); margin-top: 8px; font-size: 0.95rem; line-height: 1.5; }
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+  animation: fadeIn 0.8s ease-out;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.featureIcon { font-size: 1.5rem; }
+.feature strong { color: #fff; font-size: 0.9rem; display: block; }
+.feature p { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin-top: 2px; }
+
+.actions { animation: fadeIn 1s ease-out; }
+.googleBtn {
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.googleBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.15); }
+.terms { text-align: center; color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 16px; }
+
+.loader { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--primary); }
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
