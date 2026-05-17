@@ -1,7 +1,7 @@
 import { neon } from '@neondatabase/serverless';
 
 export function getDb() {
-  const sql = neon(process.env.DATABASE_URL!);
+  const sql = neon(process.env.DATABASE_URL || "postgresql://neondb_owner:npg_SuEx5J4CneYT@ep-sweet-tooth-abk6ih7c.eu-west-2.aws.neon.tech/neondb?sslmode=require");
   return sql;
 }
 

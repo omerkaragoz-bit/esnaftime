@@ -3,6 +3,7 @@ import Google from "next-auth/providers/google";
 import { getDb } from "./db";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "esnaftime-super-secret-key-change-in-production-12509788",
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID || process.env.AUTH_GOOGLE_ID || "203482802445-390fern1leqcut1ql9d7mrj3iu081ir8.apps.googleusercontent.com",
